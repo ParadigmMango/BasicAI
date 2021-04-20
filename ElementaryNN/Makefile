@@ -93,6 +93,7 @@ endif
 
 OBJECTS := \
 	$(OBJDIR)/Main.o \
+	$(OBJDIR)/Network.o \
 
 RESOURCES := \
 
@@ -152,6 +153,9 @@ $(OBJECTS): | $(OBJDIR)
 endif
 
 $(OBJDIR)/Main.o: src/Main.cc
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Network.o: src/Network.cc
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

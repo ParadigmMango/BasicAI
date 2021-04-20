@@ -14,6 +14,7 @@ project "ElementaryNN"
     objdir ("bin-int/%{prj.name}") -- int = intermediate binaries
     
     files {
+        "%{prj.location}/src/**.h",
         "%{prj.location}/src/**.cc"
     }
 
