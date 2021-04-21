@@ -6,7 +6,6 @@
 class Network {
   public:
     Network(std::vector<int> sizes);
-    ~Network();
 
   private:
     int num_layers_, num_elements_;

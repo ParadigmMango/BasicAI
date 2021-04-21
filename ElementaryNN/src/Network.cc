@@ -5,8 +5,8 @@
 
 Network::Network(std::vector<int> sizes) {
     // Temporary Rand Initialization - TODO: Find better solution
-    std::default_random_engine generator;
-    std::normal_distribution<double> distribution(0.0,1.0);
+    std::default_random_engine eng;
+    std::normal_distribution<double> dist_rand(0.0,1.0);
 
     num_layers_ = sizes.size();
 
@@ -15,29 +15,24 @@ Network::Network(std::vector<int> sizes) {
     for (int i = 1; i < num_layers_; ++i) {
         biases_.push_back({});
         for (int j = 0; j < sizes[i]; ++j)
-            biases_[i-1].push_back(distribution(generator));
+            biases_[i-1].push_back(dist_rand(eng));
     }        
     
     for (int i = 0; i < num_layers_ - 1; ++i) {
         weights_.push_back({});
-        for (int j = 0; j < sizes_[i]; ++j) {
+        for (int j = 0; j < sizes_[i+1]; ++j) { // Backwards to simplify sigmoid function
             weights_[i].push_back({});
-            for (int k = 0; k < sizes_[i+1]; ++k)
-                weights_[i][j].push_back(distribution(generator));
+            for (int k = 0; k < sizes_[i]; ++k)
+                weights_[i][j].push_back(dist_rand(eng));
         }
     }            
     
     num_elements_ = 0;
     for (std::vector<double> bias_layer : biases_)
-        for (double bias : bias_layer)
-            ++num_elements_;
+        num_elements_ += bias_layer.size();
     for (std::vector<std::vector<double>> weight_matrix : weights_)
         for (std::vector<double> weight_layer : weight_matrix)
-            for (double weight : weight_layer)
-                ++num_elements_;
+            num_elements_ += weight_layer.size();
 
-    std::cout << "num_layers_:\t" << num_layers_
-            << "\nnum_elements_:\t" << num_elements_ << "\n";
+    std::cout << num_layers_ << " layer NN(" << num_elements_ << ") created.\n";
 }
-
-Network::~Network() {}
