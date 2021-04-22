@@ -5,7 +5,7 @@
 
 class Network {
   public:
-    Network(std::vector<int> sizes);
+    Network(const std::vector<int> &sizes);
     std::vector<double> FeedForward(std::vector<double> activations);
 
   private:

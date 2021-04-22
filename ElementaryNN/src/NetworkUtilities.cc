@@ -5,8 +5,8 @@
 namespace network_utilities {
 
 // Precondition: a is non-jagged and a[0] is the same length as b
-std::vector<double> DotProduct(std::vector<std::vector<double>> a,
-        std::vector<double> b) {
+std::vector<double> DotProduct(const std::vector<std::vector<double>> &a,
+        const std::vector<double> &b) {
     std::vector<double> product;
     int sum;
 
@@ -21,17 +21,20 @@ std::vector<double> DotProduct(std::vector<std::vector<double>> a,
     return product;
 }
 
-double Sigmoid(double z) {
+double Sigmoid(const double &z) {
     return 1.0 / (1.0 + exp(-z));
 }
 
-std::vector<double> Sigmoid(std::vector<double> z) {
-    for (double num : z)
-        num = Sigmoid(num);
+std::vector<double> Sigmoid(const std::vector<double> &z) {
+    std::vector<double> out = z;
+
+    for (int i = 0; i < out.size(); ++i)
+        out[i] = Sigmoid(z[i]);
     
-    return z;
+    return out;
 }
 
+// Precondition: a is the same length as b
 std::vector<double> SumVectors(const std::vector<double> &a,
         const std::vector<double> &b) {
     std::vector<double> sum;

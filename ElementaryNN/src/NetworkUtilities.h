@@ -5,12 +5,12 @@
 
 namespace network_utilities {
 
-std::vector<double> DotProduct(std::vector<std::vector<double>> a,
-        std::vector<double> b);
+std::vector<double> DotProduct(const std::vector<std::vector<double>> &a,
+        const std::vector<double> &b);
 
-double Sigmoid(double z);
+double Sigmoid(const double &z);
 
-std::vector<double> Sigmoid(std::vector<double> z);
+std::vector<double> Sigmoid(const std::vector<double> &z);
 
 std::vector<double> SumVectors(const std::vector<double> &a,
         const std::vector<double> &b);

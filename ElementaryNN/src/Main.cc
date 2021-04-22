@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "Network.h"
+#include "NetworkUtilities.h"
 
 int main() {
     Network net({3, 746, 10});

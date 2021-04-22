@@ -5,7 +5,7 @@
 
 #include "NetworkUtilities.h"
 
-Network::Network(std::vector<int> sizes) {
+Network::Network(const std::vector<int> &sizes) {
     // Temporary Rand Initialization - TODO: Find better solution
     std::srand(time(NULL));
     std::random_device rd{};
@@ -24,7 +24,8 @@ Network::Network(std::vector<int> sizes) {
     
     for (int i = 0; i < num_layers_ - 1; ++i) {
         weights_.push_back({});
-        for (int j = 0; j < sizes_[i+1]; ++j) { // Backwards to simplify sigmoid
+        for (int j = 0; j < sizes_[i+1]; ++j) { // Backwards to 
+                                                // simplify FeedForward
             weights_[i].push_back({});
             for (int k = 0; k < sizes_[i]; ++k)
                 weights_[i][j].push_back(dist_rand(gen));
