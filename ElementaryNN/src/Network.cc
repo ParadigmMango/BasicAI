@@ -3,9 +3,13 @@
 #include <iostream>
 #include <random>
 
+#include "NetworkUtilities.h"
+
 Network::Network(std::vector<int> sizes) {
     // Temporary Rand Initialization - TODO: Find better solution
-    std::default_random_engine eng;
+    std::srand(time(NULL));
+    std::random_device rd{};
+    std::mt19937 gen{rd()};
     std::normal_distribution<double> dist_rand(0.0,1.0);
 
     num_layers_ = sizes.size();
@@ -15,15 +19,15 @@ Network::Network(std::vector<int> sizes) {
     for (int i = 1; i < num_layers_; ++i) {
         biases_.push_back({});
         for (int j = 0; j < sizes[i]; ++j)
-            biases_[i-1].push_back(dist_rand(eng));
+            biases_[i-1].push_back(dist_rand(gen));
     }        
     
     for (int i = 0; i < num_layers_ - 1; ++i) {
         weights_.push_back({});
-        for (int j = 0; j < sizes_[i+1]; ++j) { // Backwards to simplify sigmoid function
+        for (int j = 0; j < sizes_[i+1]; ++j) { // Backwards to simplify sigmoid
             weights_[i].push_back({});
             for (int k = 0; k < sizes_[i]; ++k)
-                weights_[i][j].push_back(dist_rand(eng));
+                weights_[i][j].push_back(dist_rand(gen));
         }
     }            
     
@@ -35,4 +39,13 @@ Network::Network(std::vector<int> sizes) {
             num_elements_ += weight_layer.size();
 
     std::cout << num_layers_ << " layer NN(" << num_elements_ << ") created.\n";
+}
+
+std::vector<double> Network::FeedForward(std::vector<double> activations) {
+    for (int i = 0; i < weights_.size(); ++i)
+        activations = network_utilities::Sigmoid(network_utilities::SumVectors(
+                network_utilities::DotProduct(weights_[i], activations),
+                biases_[i]));
+    
+    return activations;
 }
