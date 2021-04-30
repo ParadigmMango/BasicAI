@@ -7,7 +7,6 @@
 
 Network::Network(const std::vector<int> &sizes) {
     // Temporary Rand Initialization - TODO: Find better solution
-    std::srand(time(NULL));
     std::random_device rd{};
     std::mt19937 gen{rd()};
     std::normal_distribution<double> dist_rand(0.0,1.0);
