@@ -7,13 +7,13 @@
 
 namespace mnist_loader {
 
-std::vector<std::array<double, 28>> ReadImages(const std::string &path);
+std::vector<std::array<double, 784>> ReadImages(const std::string &path);
 
 std::vector<double> ReadLabels(const std::string &path);
 
 int ReverseInt(const int &num);
 
-std::vector<double> VectorizedResult(double j);
+std::array<double, 10> VectorizedResult(double j);
 
 } // namespace mnist_loader
 
