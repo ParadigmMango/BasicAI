@@ -93,6 +93,7 @@ endif
 
 OBJECTS := \
 	$(OBJDIR)/Main.o \
+	$(OBJDIR)/MnistLoader.o \
 	$(OBJDIR)/Network.o \
 	$(OBJDIR)/NetworkUtilities.o \
 
@@ -154,6 +155,9 @@ $(OBJECTS): | $(OBJDIR)
 endif
 
 $(OBJDIR)/Main.o: src/Main.cc
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MnistLoader.o: src/MnistLoader.cc
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Network.o: src/Network.cc
