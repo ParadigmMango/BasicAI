@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 
 #include "MnistLoader.h"
 #include "Network.h"
@@ -15,10 +14,12 @@ int main() {
     for (double activation : out)
         std::cout << activation << "\n";
     
-    std::vector<double> labels = mnist_loader::ReadLabels("Data/Training/train-labels-idx1-ubyte");
+    std::vector<std::array<double, 784>> images =
+            mnist_loader::ReadImages("Data/Training/train-images-idx3-ubyte");
+    std::vector<double> labels =
+            mnist_loader::ReadLabels("Data/Training/train-labels-idx1-ubyte");
 
-    for (int i = 0; i < 10; ++i)
-        std::cout << labels[i] << ' ';
+    std::cout << images.size() << ' ' << labels.size();
 
     std::cout << "End of program.\n";
 
