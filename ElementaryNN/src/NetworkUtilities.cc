@@ -26,9 +26,10 @@ double Sigmoid(const double &z) {
 }
 
 std::vector<double> Sigmoid(const std::vector<double> &z) {
-    std::vector<double> out = z;
+    std::vector<double> out;
+    out.resize(z.size());
 
-    for (int i = 0; i < out.size(); ++i)
+    for (int i = 0; i < z.size(); ++i)
         out[i] = Sigmoid(z[i]);
     
     return out;

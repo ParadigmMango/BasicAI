@@ -2,9 +2,72 @@
 
 namespace mnist_loader {
 
-// std::vector<std::array<double, 784>> ReadImages(const std::string &path);
+/*std::vector<std::array<double, 784>> ReadImages(const int &length,
+        const std::string &full_path) {
+    std::ifstream file(full_path, std::ios::binary);
 
-// std::vector<double> ReadLabels(const std::string &path);
+    std::vector<std::array<double, 784>> images;
+    images.resize(length);
+
+    if (file.is_open()) {
+        int magic_num;
+        file.read((char *) &magic_num, sizeof(magic_num));
+        magic_num = ReverseInt(magic_num);
+
+        int img_num;
+        file.read((char *) &img_num, sizeof(img_num));
+        img_num = ReverseInt(img_num);
+        
+        int num_rows;
+        file.read((char *) &num_rows, sizeof(num_rows));
+        num_rows = ReverseInt(num_rows);
+        
+        int num_cols;
+        file.read((char *) &num_cols, sizeof(num_cols));
+        num_cols = ReverseInt(num_cols);
+        
+        for (int i = 0; i < img_num; ++i) {
+            for (int r = 0; r < num_rows; ++r) {
+                for (int c = 0; c < num_cols; ++c) {
+                    
+                }
+            }
+        }
+    }
+}*/
+
+// Works with label datasets only and parses them into vectors
+// 
+// Inpired by both:
+//   https://stackoverflow.com/a/33384846
+//   https://compvisionlab.wordpress.com/2014/01/01/c-code-for-reading-mnist-data-set/
+std::vector<double> ReadLabels(const std::string &full_path) {
+    std::ifstream file(full_path, std::ios::binary);
+
+    std::vector<double> labels;
+
+    if (file.is_open()) {
+        int magic_num;
+        file.read((char *) &magic_num, sizeof(magic_num));
+        magic_num = ReverseInt(magic_num);
+
+        if(magic_num != 2049) throw "Invalid MNIST label file!";
+
+        int label_num;
+        file.read((char *) &label_num, sizeof(label_num));
+        label_num = ReverseInt(label_num);
+
+        labels.resize(label_num);
+
+        unsigned char temp;        
+        for (int i = 0; i < label_num; ++i) {
+            file.read((char *) &temp, 1);
+            labels[i] = (double) temp;
+        }
+    }
+
+    return labels;
+}
 
 // Reverses the order of the bytes of an int
 //
@@ -22,7 +85,7 @@ int ReverseInt(const int &num) {
 
 // Turn a digit n into an array that is all zeroes except the nth element,
 // which is 1.0
-std::array<double, 10> VectorizedResult(double n) {
+std::array<double, 10> VectorizedResult(const double &n) {
     std::array<double, 10> result = {0.0, 0.0, 0.0, 0.0, 0.0,
             0.0, 0.0, 0.0, 0.0, 0.0};
     
