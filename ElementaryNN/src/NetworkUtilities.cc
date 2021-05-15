@@ -35,6 +35,20 @@ std::vector<double> Sigmoid(const std::vector<double> &z) {
     return out;
 }
 
+double SigmoidPrime(const double &z) {
+    return Sigmoid(z) / (1.0 - Sigmoid(z));
+}
+
+std::vector<double> SigmoidPrime(const std::vector<double> &z) {
+    std::vector<double> out;
+    out.resize(z.size());
+
+    for (int i = 0; i < z.size(); ++i)
+        out[i] = SigmoidPrime(z[i]);
+    
+    return out;
+}
+
 // Precondition: a is the same length as b
 std::vector<double> SumVectors(const std::vector<double> &a,
         const std::vector<double> &b) {

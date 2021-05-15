@@ -12,6 +12,10 @@ double Sigmoid(const double &z);
 
 std::vector<double> Sigmoid(const std::vector<double> &z);
 
+double SigmoidPrime(const double &z);
+
+std::vector<double> SigmoidPrime(const std::vector<double> &z);
+
 std::vector<double> SumVectors(const std::vector<double> &a,
         const std::vector<double> &b);
 
