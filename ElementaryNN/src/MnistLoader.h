@@ -4,13 +4,14 @@
 #include <array>
 #include <fstream>
 #include <string>
-#include <vector>
+
+#include "Aliases.h"
 
 namespace mnist_loader {
 
-std::vector<std::array<double, 784>> ReadImages(const std::string &full_path);
+Images ReadImages(const std::string &full_path);
 
-std::vector<double> ReadLabels(const std::string &full_path);
+Labels ReadLabels(const std::string &full_path);
 
 int ReverseInt(const int &num);
 

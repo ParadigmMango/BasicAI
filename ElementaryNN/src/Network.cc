@@ -41,11 +41,19 @@ Network::Network(const std::vector<int> &sizes) {
     std::cout << num_layers_ << " layer NN(" << num_elements_ << ") created.\n";
 }
 
-std::vector<double> Network::FeedForward(std::vector<double> activations) {
-    for (int i = 0; i < weights_.size(); ++i)
-        activations = network_utilities::Sigmoid(network_utilities::SumVectors(
-                network_utilities::DotProduct(weights_[i], activations),
-                biases_[i]));
+std::pair<Biases, Weights> Backprop(const Labels &labels,
+        const Images &images) {
     
-    return activations;
+}
+
+std::vector<double> Network::FeedForward(const Image &activations) {
+    std::vector<double> activations_vector(activations.begin(),
+            activations.end());
+
+    for (int i = 0; i < weights_.size(); ++i)
+        activations_vector = network_utilities::Sigmoid(
+                network_utilities::SumVectors(network_utilities::DotProduct(
+                weights_[i], activations_vector), biases_[i]));
+    
+    return activations_vector;
 }

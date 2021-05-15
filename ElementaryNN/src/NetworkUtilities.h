@@ -21,4 +21,4 @@ std::vector<double> SumVectors(const std::vector<double> &a,
 
 } // namespace network_utilities
 
-#endif  // NETWORK_UTILITIES_H_
+#endif // NETWORK_UTILITIES_H_

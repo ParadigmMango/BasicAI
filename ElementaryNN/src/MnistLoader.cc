@@ -7,17 +7,17 @@ namespace mnist_loader {
 // Inpired by both:
 //   https://stackoverflow.com/a/33384846
 //   https://compvisionlab.wordpress.com/2014/01/01/c-code-for-reading-mnist-data-set/
-std::vector<std::array<double, 784>> ReadImages(const std::string &full_path) {
+Images ReadImages(const std::string &full_path) {
     std::ifstream file(full_path, std::ios::binary);
 
-    std::vector<std::array<double, 784>> images;
+    Images images;
 
     if (file.is_open()) {
         int magic_num;
         file.read((char *) &magic_num, sizeof(magic_num));
         magic_num = ReverseInt(magic_num);
 
-        if(magic_num != 2051) throw "Invalid MNIST image file!";
+        if (magic_num != 2051) throw "Invalid MNIST image file!";
 
         int img_num;
         file.read((char *) &img_num, sizeof(img_num));
@@ -52,17 +52,17 @@ std::vector<std::array<double, 784>> ReadImages(const std::string &full_path) {
 // Inpired by both:
 //   https://stackoverflow.com/a/33384846
 //   https://compvisionlab.wordpress.com/2014/01/01/c-code-for-reading-mnist-data-set/
-std::vector<double> ReadLabels(const std::string &full_path) {
+Labels ReadLabels(const std::string &full_path) {
     std::ifstream file(full_path, std::ios::binary);
 
-    std::vector<double> labels;
+    Labels labels;
 
     if (file.is_open()) {
         int magic_num;
         file.read((char *) &magic_num, sizeof(magic_num));
         magic_num = ReverseInt(magic_num);
 
-        if(magic_num != 2049) throw "Invalid MNIST label file!";
+        if (magic_num != 2049) throw "Invalid MNIST label file!";
 
         int label_num;
         file.read((char *) &label_num, sizeof(label_num));
