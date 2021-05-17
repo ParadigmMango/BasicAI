@@ -21,6 +21,20 @@ std::vector<double> DotProduct(const std::vector<std::vector<double>> &a,
     return product;
 }
 
+// Not a proper dot product, but gives an a by b matrix
+std::vector<std::vector<double>> DotProduct(const std::vector<double> &a,
+        const std::vector<double> &b) {
+    std::vector<std::vector<double>> product;
+
+    for (int i = 0; i < a.size(); ++i) {
+        product.push_back({});
+        for (int j = 0; j < b.size(); ++j)
+            product[i].push_back(a[i] * b[j]);
+    }
+    
+    return product;
+}
+
 double Sigmoid(const double &z) {
     return 1.0 / (1.0 + exp(-z));
 }
