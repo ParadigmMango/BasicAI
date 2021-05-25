@@ -94,6 +94,17 @@ int ReverseInt(const int &num) {
     return ((int)c1 << 24) + ((int)c2 << 16) + ((int)c3 << 8) + c4;
 }
 
+// Vectorizes all labels in a Labels vector
+VectorizedLabels VectorizeLabels(const Labels &labels) {
+    VectorizedLabels vectorized_labels;
+    vectorized_labels.resize(labels.size());
+
+    for (int i = 0; i < labels.size(); ++i)
+        vectorized_labels[i] = VectorizedResult(labels[i]);
+    
+    return vectorized_labels;
+}
+
 // Turn a digit n into an array that is all zeroes except the nth element,
 // which is 1.0
 std::array<double, 10> VectorizedResult(const double &n) {

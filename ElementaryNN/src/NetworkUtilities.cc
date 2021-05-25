@@ -74,4 +74,19 @@ std::vector<double> SumVectors(const std::vector<double> &a,
     return sum;
 }
 
+// Flips the matrix along the diagonal
+std::vector<std::vector<double>> Transpose(
+        const std::vector<std::vector<double>> &a) {
+    std::vector<std::vector<double>> new_mat;
+
+    for (int i = 0; i < a[0].size(); ++i)
+        new_mat.push_back({});
+
+    for (int i = 0; i < a[0].size(); ++i)
+        for (int j = 0; j < a.size(); ++j)
+            new_mat[i].push_back(a[j][i]);
+    
+    return new_mat;
+}
+
 } // namespace network_utilities

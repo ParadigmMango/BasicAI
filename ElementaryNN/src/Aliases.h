@@ -8,6 +8,8 @@ using Biases = std::vector<std::vector<double>>;
 using Image = std::array<double, 784>;
 using Images = std::vector<Image>;
 using Labels = std::vector<double>;
+using VectorizedLabel = std::array<double, 10>;
+using VectorizedLabels = std::vector<VectorizedLabel>;
 using Weights = std::vector<std::vector<std::vector<double>>>;
 
 #endif // ALIASES_H_

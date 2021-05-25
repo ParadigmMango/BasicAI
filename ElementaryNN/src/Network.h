@@ -9,8 +9,6 @@
 class Network {
   public:
     Network(const std::vector<int> &sizes);
-    std::pair<Biases, Weights> Backprop(const Labels &labels,
-            const Images &images);
     std::vector<double> FeedForward(const Image &activations);
 
   private:
@@ -18,6 +16,11 @@ class Network {
     std::vector<int> sizes_;
     Biases biases_;
     Weights weights_;
+
+    std::pair<Biases, Weights> Backprop(const Image &images,
+            const VectorizedLabel &label);
+    std::vector<double> CostDerivative(const std::vector<double>
+            &output_activations, const VectorizedLabel &label);
 };
 
 #endif  // NETWORK_H_

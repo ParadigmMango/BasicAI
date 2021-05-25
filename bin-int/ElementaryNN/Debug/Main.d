@@ -1,6 +1,6 @@
-../bin-int/ElementaryNN/Debug/Main.o: src/Main.cc src/MnistLoader.h \
- src/Network.h src/Aliases.h src/NetworkUtilities.h
+../bin-int/ElementaryNN/Debug/Main.o: src/Main.cc src/Aliases.h \
+ src/MnistLoader.h src/Network.h src/NetworkUtilities.h
+src/Aliases.h:
 src/MnistLoader.h:
 src/Network.h:
-src/Aliases.h:
 src/NetworkUtilities.h:

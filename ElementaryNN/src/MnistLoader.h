@@ -15,7 +15,9 @@ Labels ReadLabels(const std::string &full_path);
 
 int ReverseInt(const int &num);
 
-std::array<double, 10> VectorizedResult(double j);
+VectorizedLabels VectorizeLabels(const Labels &labels);
+
+std::array<double, 10> VectorizedResult(const double &n);
 
 } // namespace mnist_loader
 
